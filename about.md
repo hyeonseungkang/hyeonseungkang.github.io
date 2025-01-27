@@ -2,19 +2,34 @@
 title: Hyeonseung Kang
 permalink: /about/
 layout: page
-excerpt: Hello peeps, I'm student of computer science from South Korea, living in Suwon. This blog for documentation about my programming journey, running on jekyll, hosting on netlify and using my own simple theme.
 comments: false
 ---
 
-He's a student from South Korea, living in Suwon-si. the blog for documentation about his programming 🎒 journey, running on jekyll.
+안녕하세요.
 
-If you have a question about him or else, just send a letter to him.
+연락하고 싶으시다면 [메일](mailto:hyeonseung.kang.dev@gmail.com) 및 아래 채널을 사용해주십시오.
 
-You can [report](mailto:hyeonseung.kang.dev@gmail.com) if there is an broken link(s) or somethings else.
-
-**may u needs ✨**
+### 연락 채널
 
 - Email 
   - {{ site.author.email }}
 - Github
   - @{{ site.author.github }}
+
+<h3 aria-label="Recent Posts">지내온 곳</h3>
+<article class="post-item">
+  <span class="post-item-date">2021/03 - 2022/02</span>
+  <h4 class="post-item-title">부경대학교 경영학과</h4>
+</article>
+<article class="post-item">
+  <span class="post-item-date">2022/03 - 2023/06</span>
+  <h4 class="post-item-title">아주대학교 경영인텔리전스학과</h4>
+</article>
+<article class="post-item">
+  <span class="post-item-date">2023/07 - 2025/01</span>
+  <h4 class="post-item-title">대한민국 육군</h4>
+</article>
+<article class="post-item">
+  <span class="post-item-date">2025/03 - 0000/00</span>
+  <h4 class="post-item-title">아주대학교 경영인텔리전스학과</h4>
+</article>
