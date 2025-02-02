@@ -7,7 +7,7 @@ comments: false
 
 안녕하세요.
 
-연락하고 싶으시다면 [메일](mailto:hyeonseung.kang.dev@gmail.com) 및 아래 채널을 사용해주십시오.
+연락하고 싶으시다면 [메일](mailto:hyeonseungkang@outlook.com) 및 아래 채널을 사용해주십시오.
 
 ### 연락 채널
 
