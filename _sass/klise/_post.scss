@@ -49,8 +49,9 @@
 
   time {
     position: relative;
-    margin-right: 1.5em;
+    margin-right: 0.5em;
 
+    /* post 페이지, 제목 밑 날짜와 저자 이름 사이에 최색 밑줄 제거.
     &::after {
       background: $light;
       bottom: 1px;
@@ -60,10 +61,15 @@
       right: -20px;
       width: 12px;
     }
+    */
   }
 
-  span[itemprop="author"] {
-    border-bottom: 1px dotted $light;
+  a {
+    span[itemprop="author"] {
+      border-bottom: 1px dotted $light;
+      text-decoration: none;
+      color: $gray;
+    }
   }
 }
 
@@ -165,29 +171,39 @@
   }
 
   h1 {
-    @include relative-font-size(1.5);
+    @include relative-font-size(1.8);
+    border-bottom: 1px solid $light;
+    padding-bottom: 2px;
   }
 
   h2 {
-    @include relative-font-size(1.375);
+    @include relative-font-size(1.65);
+    border-bottom: 1px solid $light;
+    padding-bottom: 2px;
   }
 
   h3 {
-    @include relative-font-size(1.25);
+    @include relative-font-size(1.45);
     border-bottom: 1px solid $light;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
   }
 
   h4 {
-    @include relative-font-size(1.25);
+    @include relative-font-size(1.35);
+    border-bottom: 1px solid $light;
+    padding-bottom: 2px;
   }
 
   h5 {
-    @include relative-font-size(1);
+    @include relative-font-size(1.25);
+    border-bottom: 1px solid $light;
+    padding-bottom: 2px;
   }
 
   h6 {
-    @include relative-font-size(0.875);
+    @include relative-font-size(1.1);
+    border-bottom: 1px solid $light;
+    padding-bottom: 2px;
   }
 }
 

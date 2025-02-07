@@ -285,7 +285,8 @@
     text-decoration: none;
 
     &:not(:last-child) {
-      margin-right: 10px;
+      /* 이름과 카피라이트 로고 간 간격 수정 */
+      margin-right: 0.4em;
       &:hover {
         opacity: 1;
       }

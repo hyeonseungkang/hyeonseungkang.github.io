@@ -51,9 +51,11 @@ layout: compress
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
               {{ page.date | date: "%Y/%m/%d" }}
             </time>
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <span itemprop="name">{{ site.author.name }}</span>
-            </span>
+            <a href="/about">
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">{{ site.author.name }}</span>
+              </span>
+            </a>
             <time hidden datetime="{{ page.modified | date_to_xmlschema }}" itemprop="dateModified">
               {{ page.date | date: "%b %d, %Y" }}
             </time>
