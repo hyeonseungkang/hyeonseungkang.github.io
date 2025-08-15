@@ -21,10 +21,10 @@ author:
   avatar: /assets/img/avatar.png # change with your own avatar
 
 # URL settings
-url: "https://hyeonseungkang.github.io" #
+url: "https://hyeonseungkang.github.io"
 baseurl:
 permalink: /:title/
-google_analytics: # leave it blank if not wish
+google_analytics: "GTM-TKSWC3KQ"
 fb_appid:
 
 # Collection setting
