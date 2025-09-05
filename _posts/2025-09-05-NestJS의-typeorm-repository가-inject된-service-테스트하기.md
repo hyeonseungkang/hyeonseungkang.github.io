@@ -7,7 +7,12 @@ date:   2025-09-05 17:04:00 +0900
 ![NestJS에서_Typeorm_repository_injected_service_테스트하기.jpg](../attachments/images/2025-09-05/test_nestjs_typeorm_repository_injected_service_title.jpg)
 
 프로젝트에서 DB를 사용하기 위해 TypeOrmModule을 사용하고 있다.
-Service 클래스나 커스텀 repository에서 Typeorm의 repository를 inject한 경우, 테스트코드 작성 요령을 공유한다.
+
+테스트대상 서비스가 TypeOrmModule의 repository를 의존성으로 갖고 있는 경우, 이 서비스를 어떻게 테스트해야 할까?
+
+테스트코드에서 실제 데이터베이스에 연결하거나 테스트용 데이터베이스를 굳이 연결하고 싶지 않다면, 의존서비스의 메소드가 말 그대로 존재만 하고 아무 기능도 하지 않는 mock로 만들면 된다.
+
+최근 Service 클래스나 커스텀 repository에서 Typeorm의 repository를 inject한 경우, 테스트코드를 작성하게 되어 요령을 공유한다.
 
 ```typescript
 describe('CustomRepository', () => {
@@ -21,7 +26,7 @@ describe('CustomRepository', () => {
     repositoryMock.save.mockImplementation(
         // mockImplementation 으로 구현할 때 기존 메소드의 type을 지켜야 한다. 여기서는 cast 하였다.
         async (entity: DeepPartial<EntityName>) => {
-            // todo
+            // something todo
             return entity as DeepPartial<EntityName> & EntityName;
         },
     );
