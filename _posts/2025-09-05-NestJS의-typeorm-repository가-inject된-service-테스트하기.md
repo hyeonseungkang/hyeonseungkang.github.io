@@ -4,6 +4,8 @@ title:  "NestJS의 Typeorm repository가 inject된 service 테스트하기"
 date:   2025-09-05 17:04:00 +0900
 ---
 
+![NestJS에서_Typeorm_repository_injected_service_테스트하기.jpg](../attachments/images/2025-09-05/NestJS에서_Typeorm_repository_injected_service_테스트하기.jpg)
+
 프로젝트에서 DB를 사용하기 위해 TypeOrmModule을 사용하고 있다.
 Service 클래스나 커스텀 repository에서 Typeorm의 repository를 inject한 경우, 테스트코드 작성 요령을 공유한다.
 
