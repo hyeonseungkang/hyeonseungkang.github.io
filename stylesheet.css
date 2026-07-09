@@ -92,8 +92,8 @@ strong {
 h2 {
   margin: 0;
   font-weight: normal;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
+  font-family: serif;
+  font-size: 26px;
 }
 
 .papertitle {
@@ -105,8 +105,8 @@ h2 {
 .name {
   padding-top: 20px;
   margin: 0;
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
+  font-family: serif;
+  font-size: 38px;
 }
 
 .one {
@@ -139,4 +139,8 @@ span.highlight {
     padding: 20px;
     display: inline-block;
     border-radius: 10px;
+}
+
+ul {
+  padding-left: 1em;
 }
