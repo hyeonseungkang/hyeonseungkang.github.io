@@ -109,6 +109,11 @@ h2 {
   font-size: 38px;
 }
 
+.name-section {
+  line-height: 1.7em;
+  color: dimgray;
+}
+
 .one {
   width: 160px;
   height: 160px;
