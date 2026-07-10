@@ -149,3 +149,16 @@ span.highlight {
 ul {
   padding-left: 1em;
 }
+
+#floating-button {
+  position: fixed;
+  font-size: 1.1em;
+  right: 5em;
+  bottom: 5em;
+}
+
+@media print {
+  .remove-on-print {
+    display: none!important;
+  }
+}
