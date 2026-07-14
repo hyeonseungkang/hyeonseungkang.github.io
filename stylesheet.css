@@ -319,6 +319,10 @@ ul {
     align-self: stretch;
     padding: 0 20px 20px 20px !important;
   }
+
+  #floating-button {
+    display: none!important;
+  }
 }
 
 /* 경력사항/활동: date column top-aligned */
