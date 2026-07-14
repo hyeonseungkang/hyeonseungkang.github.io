@@ -305,6 +305,22 @@ ul {
   padding: 20px;
 }
 
+@media (max-width: 600px) {
+  .entry-list--media .entry {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .entry-list--media .entry-side {
+    padding: 16px 16px 0 16px !important;
+  }
+
+  .entry-list--media .entry-main {
+    align-self: stretch;
+    padding: 0 20px 20px 20px !important;
+  }
+}
+
 /* 경력사항/활동: date column top-aligned */
 .entry-list--history .entry-side {
   align-self: flex-start;
