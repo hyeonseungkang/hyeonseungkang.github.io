@@ -323,6 +323,16 @@ ul {
   #floating-button {
     display: none!important;
   }
+
+  .mobile-break {
+    display: block;
+  }
+}
+
+@media (min-width: 600px) {
+  .mobile-break {
+    display: none;
+  }
 }
 
 /* 경력사항/활동: date column top-aligned */
