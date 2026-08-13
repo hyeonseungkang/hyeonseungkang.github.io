@@ -3,105 +3,106 @@
 
 Only the 경력사항, 활동, and 자격사항 sections are synced into the CV — the
 document keeps its existing scope rather than mirroring every section on
-the website.
+the website. Content is written into a copy of scripts/cv_template.docx;
+see docx_utils.py for how the template's formatting is preserved.
 """
+import copy
 from pathlib import Path
 
-import yaml
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Pt
+from docx.oxml.ns import qn
+
+from docx_utils import (
+    ensure_blank_line_before,
+    find_blank_line_template,
+    format_period,
+    get_section_tables,
+    load_config,
+    rebuild_table_rows,
+    set_name_paragraph,
+    set_paragraph_text,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CONFIG_PATH = REPO_ROOT / "_config.yml"
+TEMPLATE_PATH = REPO_ROOT / "scripts" / "cv_template.docx"
 OUTPUT_PATH = REPO_ROOT / "data" / "ko" / "HyeonseungKang-CV.docx"
 
-# Not present in _config.yml (kept out of the public site data on purpose).
-MOBILE = "+82 10-5934-0552"
-PORTFOLIO_URL = "https://hyeonseungkang.github.io"
-
-HISTORY_SECTION_IDS = ["경력사항", "활동"]
+CAREER_SECTION_ID = "경력사항"
+ACTIVITY_SECTION_ID = "활동"
 QUALIFICATION_SECTION_ID = "자격사항"
 QUALIFICATION_HEADING = "어학 및 자격사항"
 
 
-def load_config():
-    with CONFIG_PATH.open(encoding="utf-8") as f:
-        config = yaml.safe_load(f)
-    sections_by_id = {section["id"]: section for section in config["sections"]}
-    return config, sections_by_id
+def fill_history_row(tr, item):
+    main_tc, period_tc = tr.findall(qn("w:tc"))
+    title_p, description_p = main_tc.findall(qn("w:p"))
+    set_paragraph_text(title_p, item["title"])
+    set_paragraph_text(description_p, item.get("description", ""))
+
+    _, period_p = period_tc.findall(qn("w:p"))
+    set_paragraph_text(period_p, format_period(item["period"]))
 
 
-def add_header(doc, config):
-    table = doc.add_table(rows=1, cols=2)
-    table.style = "Table Grid"
-    name_cell, contact_cell = table.rows[0].cells
-
-    name_run = name_cell.paragraphs[0].add_run(config["title"])
-    name_run.bold = True
-    name_run.font.size = Pt(24)
-
-    contact_lines = [
-        ("Email: ", config["email"]),
-        ("Mobile: ", MOBILE),
-        ("Portfolio: ", PORTFOLIO_URL),
-    ]
-    contact_cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    for i, (label, value) in enumerate(contact_lines):
-        p = contact_cell.paragraphs[0] if i == 0 else contact_cell.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        p.add_run(label).bold = True
-        p.add_run(value)
+def fill_qualification_row(tr, item):
+    title_tc, description_tc, period_tc = tr.findall(qn("w:tc"))
+    set_paragraph_text(title_tc.find(qn("w:p")), item["title"])
+    set_paragraph_text(description_tc.find(qn("w:p")), item.get("description", ""))
+    set_paragraph_text(period_tc.find(qn("w:p")), format_period(item["period"]))
 
 
-def add_history_table(doc, section):
-    doc.add_heading(section["title"], level=2)
-    table = doc.add_table(rows=0, cols=2)
-    table.style = "Table Grid"
-    for item in section["items"]:
-        row = table.add_row()
-        main_cell, period_cell = row.cells
-
-        title_run = main_cell.paragraphs[0].add_run(item["title"])
-        title_run.bold = True
-        if item.get("description"):
-            main_cell.add_paragraph(item["description"])
-
-        period_cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        period_cell.paragraphs[0].add_run(item["period"])
-
-
-def add_qualification_table(doc, section):
-    doc.add_heading(QUALIFICATION_HEADING, level=2)
-    table = doc.add_table(rows=0, cols=3)
-    table.style = "Table Grid"
-    for item in section["items"]:
-        row = table.add_row()
-        title_cell, desc_cell, period_cell = row.cells
-
-        title_cell.paragraphs[0].add_run(item["title"]).bold = True
-        desc_cell.paragraphs[0].add_run(item.get("description", ""))
-        period_cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        period_cell.paragraphs[0].add_run(item["period"])
+def build_qualification_template(table):
+    """The template's 자격사항 table crams every entry into one row as
+    stacked paragraphs (a leftover from manual editing) instead of one row
+    per entry. Trim it down to a single-paragraph-per-cell row so it can be
+    cloned per item like the other tables."""
+    tr = copy.deepcopy(table._tbl.findall(qn("w:tr"))[0])
+    for tc in tr.findall(qn("w:tc")):
+        paragraphs = tc.findall(qn("w:p"))
+        for paragraph in paragraphs[1:]:
+            tc.remove(paragraph)
+    return tr
 
 
 def main():
     config, sections_by_id = load_config()
 
-    doc = Document()
-    add_header(doc, config)
-    doc.add_paragraph()
+    doc = Document(TEMPLATE_PATH)
+    tables = get_section_tables(doc)
+    blank_line_template = find_blank_line_template(doc)
 
-    for section_id in HISTORY_SECTION_IDS:
-        section = sections_by_id.get(section_id)
-        if section is None:
-            continue
-        add_history_table(doc, section)
-        doc.add_paragraph()
+    set_name_paragraph(doc, tables, config["title"])
 
-    qualification_section = sections_by_id.get(QUALIFICATION_SECTION_ID)
-    if qualification_section is not None:
-        add_qualification_table(doc, qualification_section)
+    # 경력사항's template row is already one-row-per-entry; reuse it for
+    # 활동 too, since 활동's own row has the same stacked-paragraph drift
+    # as the qualifications table.
+    history_template = copy.deepcopy(tables[CAREER_SECTION_ID]._tbl.findall(qn("w:tr"))[0])
+
+    rebuild_table_rows(
+        tables[CAREER_SECTION_ID],
+        sections_by_id[CAREER_SECTION_ID]["items"],
+        fill_history_row,
+        template_tr=history_template,
+    )
+    rebuild_table_rows(
+        tables[ACTIVITY_SECTION_ID],
+        sections_by_id[ACTIVITY_SECTION_ID]["items"],
+        fill_history_row,
+        template_tr=history_template,
+    )
+
+    qualification_table = tables[QUALIFICATION_HEADING]
+    qualification_template = build_qualification_template(qualification_table)
+    rebuild_table_rows(
+        qualification_table,
+        sections_by_id[QUALIFICATION_SECTION_ID]["items"],
+        fill_qualification_row,
+        template_tr=qualification_template,
+    )
+
+    # The template relied on a trailing blank paragraph inside 활동's old
+    # single-row layout for spacing before this heading; that paragraph no
+    # longer exists now that 활동 is rebuilt as one row per entry.
+    ensure_blank_line_before(doc, QUALIFICATION_HEADING, blank_line_template)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     doc.save(OUTPUT_PATH)
