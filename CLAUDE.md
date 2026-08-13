@@ -4,40 +4,41 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Single-page static résumé/portfolio site for 강현승 (Hyeonseung Kang), served at https://hyeonseungkang.github.io. Content is in Korean. The entire site is [index.html](index.html) + [stylesheet.css](stylesheet.css) — no build step, no JavaScript, no framework. It is a heavily customized fork of [Jon Barron's academic website template](https://github.com/jonbarron/jonbarron_website).
+Single-page static résumé/portfolio site for 강현승 (Hyeonseung Kang), served at https://hyeonseungkang.github.io. Content is in Korean. The site is built with **Jekyll** — repeatable portfolio data is configured in `_config.yml` and rendered dynamically via Liquid templates in `_layouts/default.html` + `index.html` + `stylesheet.css`.
 
 ## Workflow & Commands
 
-- **No build, lint, or test steps.** Edit HTML/CSS directly.
-- **Local Development:** Preview by opening `index.html` directly in a browser or running a static server:
-  - `python3 -m http.server 8000`
-  - `npx serve .`
-- **Deployment:** Pushing to `master` triggers [.github/workflows/static.yml](.github/workflows/static.yml), which deploys the repository root to GitHub Pages. There is no staging environment — pushes to `master` deploy directly to production.
-- **Commits:** Mix of Korean and Conventional Commits English prefixes (`feat:`, `fix:`, `content:`).
+- **Local Development:**
+  - Build site: `jekyll build` or `bundle exec jekyll build`
+  - Run dev server with live reload: `jekyll serve` or `bundle exec jekyll serve` (default at `http://localhost:4000`)
+- **Deployment:** Pushing to `master` triggers [.github/workflows/static.yml](.github/workflows/static.yml), which builds the Jekyll site (`actions/jekyll-build-pages@v1`) and deploys `_site` to GitHub Pages.
 
-## Layout System
+## Architecture & Configuration
 
-The page is a stack of résumé sections. Each section consists of an `<a id="한글">` anchor, an `<h2 class="section-heading">` heading with a hash link, an `<hr>`, and an `.entry-list`.
+- **`_config.yml`**: Central source of truth for all portfolio content:
+  - Meta info: `title`, `author`, `email`, `cv_url`, `github_url`, `bio`, `profile_photo`, `gallery`.
+  - `sections`: Array of sections (`학력`, `프로젝트`, `경력사항`, `활동`, `자격사항`, `교육사항`, `수상`, `장학`).
+  - Adding, removing, or updating items or sections in `_config.yml` automatically updates the Table of Contents (TOC), section headers, and section anchor links in sync.
 
-**Three-way synchronization:** When adding, removing, or renaming a section, keep three items in sync:
-1. The section anchor `id` (e.g., `<a id="프로젝트"></a>`)
-2. The hash link inside the section heading (e.g., `<a class="hash-link" href="#프로젝트">#</a>`)
-3. The corresponding link in the `.toc` navigation block
+- **`_layouts/default.html`**: Master Liquid layout template that dynamically renders:
+  - Header & Profile
+  - Gallery
+  - TOC navigation (dynamically generated from `site.sections`)
+  - Entry lists based on section `type`:
+    - `edu` (`.entry-list--edu`) — 학력
+    - `media` (`.entry-list--media`) — 프로젝트 / 교육사항 / 수상 / 장학 (collapses vertically on mobile ≤600px)
+    - `history` (`.entry-list--history`) — 경력사항 / 활동 / 자격사항
 
-`.entry-list` modifier classes control `.entry` layout:
-- `.entry-list--edu` — Fixed-width date column (`.entry-side` 30%) beside text (`.entry-main`). Used for 학력.
-- `.entry-list--media` — Thumbnail image in `.entry-side`, text in `.entry-main`. Used for 프로젝트/교육사항/수상/장학. **Collapses to vertical stacking on mobile (≤600px)**.
-- `.entry-list--history` — Top-aligned date column beside text. Used for 경력사항/활동.
+- **`index.html`**: Front-matter entry point (`layout: default`).
 
 ## Responsive & Print Conventions
 
 - **Breakpoint:** `600px` (`@media (max-width: 600px)`).
-- **Mobile line breaks:** `<br class="mobile-break">` renders breaks only on mobile screens (hidden on desktop).
-- **Print hiding:** `class="remove-on-print"` hides navigation and chrome elements (TOC, hash links, floating back-to-top button, footer note) when printing or exporting to PDF (`@media print`).
-- **Back-to-top button:** `#floating-button` is fixed-position and hidden on mobile.
+- **Mobile line breaks:** `<br class="mobile-break">` in data strings renders breaks only on mobile.
+- **Print hiding:** `class="remove-on-print"` hides navigation and chrome elements when exporting to PDF / printing (`@media print`).
 
 ## Assets & Fonts
 
-- **Images:** Stored in `images/` (filenames include Korean terms); favicons in `images/favicon/`.
-- **Documents:** Downloadable PDFs (CV, papers) in `data/ko/`.
-- **Fonts:** **Lato** is loaded via Google Fonts; Korean text falls back to system fonts.
+- **Images:** Stored in `images/`; favicons in `images/favicon/`.
+- **Documents:** Downloadable PDFs in `data/ko/`.
+- **Fonts:** **Lato** via Google Fonts; Korean text falls back to system fonts.
