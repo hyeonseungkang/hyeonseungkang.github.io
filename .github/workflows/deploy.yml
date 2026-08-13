@@ -1,0 +1,97 @@
+name: Generate Documents & Deploy Site
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Single group across the whole pipeline: doc-regeneration commits and the
+# Pages deploy both run in this one workflow/job now, so there's no longer a
+# separate workflow racing to push to master at the same time.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install pyyaml python-docx
+
+      - name: Generate CV docx from _config.yml
+        run: python scripts/generate_cv_docx.py
+
+      - name: Generate Portfolio docx from _config.yml
+        run: python scripts/generate_portfolio_docx.py
+
+      - name: Check for document changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/ko/HyeonseungKang-CV.docx; then
+            echo "cv_changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "cv_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          if git diff --quiet -- data/ko/HyeonseungKang-Portfolio.docx; then
+            echo "portfolio_changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "portfolio_changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install LibreOffice
+        if: steps.diff.outputs.cv_changed == 'true' || steps.diff.outputs.portfolio_changed == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libreoffice-writer
+
+      - name: Convert CV docx to PDF
+        if: steps.diff.outputs.cv_changed == 'true'
+        run: soffice --headless --convert-to pdf --outdir data/ko data/ko/HyeonseungKang-CV.docx
+
+      - name: Convert Portfolio docx to PDF
+        if: steps.diff.outputs.portfolio_changed == 'true'
+        run: soffice --headless --convert-to pdf --outdir data/ko data/ko/HyeonseungKang-Portfolio.docx
+
+      - name: Commit updated documents
+        if: steps.diff.outputs.cv_changed == 'true' || steps.diff.outputs.portfolio_changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ko/HyeonseungKang-CV.docx data/ko/HyeonseungKang-CV.pdf data/ko/HyeonseungKang-Portfolio.docx data/ko/HyeonseungKang-Portfolio.pdf
+          git commit -m "chore: regenerate CV/Portfolio docx and pdf from _config.yml [skip ci]"
+          git push
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./_site"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
