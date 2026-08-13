@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ site.title }}</title>
+    <meta name="author" content="{{ site.author }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    {% if site.naver_site_verification %}
+    <meta name="naver-site-verification" content="{{ site.naver_site_verification }}" />
+    {% endif %}
+</head>
+
+<body>
+    <a id="floating-button" href="#bio">상단으로</a>
+    <a id="bio"></a>
+    <div class="page">
+
+        <div class="profile">
+            <div class="profile-info">
+                <p class="name" style="text-align: center;">
+                    {{ site.title }}
+                </p>
+                <p class="name-section">
+                    {{ site.bio }}
+                </p>
+                <p id="contact-info" style="text-align:center">
+                    {% if site.email %}<a href="mailto:{{ site.email }}">Email</a>{% endif %}
+                    {% if site.cv_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.cv_url }}">CV</a>{% endif %}
+                    {% if site.github_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.github_url }}">Github</a>{% endif %}
+                </p>
+            </div>
+            {% if site.profile_photo %}
+            <div class="profile-photo">
+                <img alt="profile photo" src="{{ site.profile_photo }}" class="hoverZoomLink">
+            </div>
+            {% endif %}
+        </div>
+
+        {% if site.gallery %}
+        <div class="gallery">
+            {% for img in site.gallery %}
+            <img src="{{ img.src }}" height="{{ img.height | default: 180 }}">
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="toc">
+            <h2 class="toc-title" style="display: inline">TOC</h2>
+            <div class="toc-links">
+                <a href="#bio">Bio</a>
+                {% for section in site.sections %}
+                <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+                <a href="#{{ section.id }}">{{ section.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% for section in site.sections %}
+        <a id="{{ section.id }}"></a>
+        <div class="section-parent">
+            <h2 class="section-heading"><a class="hash-link" href="#{{ section.id }}">#</a> {{ section.title }}</h2>
+            <hr>
+            <div class="entry-list entry-list--{{ section.type }}">
+                {% if section.type == "edu" %}
+                    {% for item in section.items %}
+                    {% assign period_parts = item.period | split: " - " %}
+                    <div class="entry">
+                        <div class="entry-side">
+                            <span>{% if period_parts.size > 1 %}{{ period_parts[0] }} -<br class="mobile-break"> {{ period_parts[1] }}{% else %}{{ item.period }}{% endif %}</span>
+                        </div>
+                        <div class="entry-main">
+                            <span>{{ item.main }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                {% elsif section.type == "history" %}
+                    {% for item in section.items %}
+                    {% assign period_parts = item.period | split: " - " %}
+                    <div class="entry">
+                        <div class="entry-side">
+                            <p>{% if period_parts.size > 1 %}{{ period_parts[0] }} -<br class="mobile-break"> {{ period_parts[1] }}{% else %}{{ item.period }}{% endif %}</p>
+                        </div>
+                        <div class="entry-main">
+                            <p>{{ item.title }}</p>
+                            {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                {% elsif section.type == "media" %}
+                    {% for item in section.items %}
+                    <div class="entry">
+                        <div class="entry-side">
+                            <img src="{{ item.image }}" width="160">
+                        </div>
+                        <div class="entry-main">
+                            {% if item.event %}<p>{{ item.event }}</p>{% endif %}
+                            {% if item.period %}<p>{{ item.period }}</p>{% endif %}
+
+                            {% if item.title %}
+                            <p><span class="papertitle">{{ item.title }}</span>{% if item.subtitle %}<br>{{ item.subtitle }}{% endif %}</p>
+                            {% endif %}
+
+                            {% if item.organization %}<p>{{ item.organization }}</p>{% endif %}
+
+                            {% if item.links %}
+                            <p>
+                                {% for link in item.links %}
+                                <a href="{{ link.url }}">{{ link.text }}</a>{% unless forloop.last %}<span> / </span>{% endunless %}
+                                {% endfor %}
+                            </p>
+                            {% endif %}
+
+                            {% if item.description %}<p>{{ item.description }}</p>{% endif %}
+
+                            {% if item.details %}
+                            <ul>
+                                {% for detail in item.details %}
+                                <li>{{ detail }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% if forloop.last %}
+            <div class="footer-row">
+                <span>End of Document.</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="footer-note">
+            <br>
+            <p style="text-align:right;font-size:small;">
+                Feel free to steal this website's <a href="https://github.com/jonbarron/jonbarron_website">source
+                    code</a>. <strong>Do not</strong> scrape the HTML from this page itself, as it includes
+                analytics tags that you do not want on your own website &mdash; use the github code instead.
+                Also, consider using <a href="https://leonidk.com/">Leonid Keselman</a>'s <a
+                    href="https://github.com/leonidk/new_website">Jekyll fork</a> of this page.
+            </p>
+        </div>
+
+    </div>
+</body>
+
+</html>
