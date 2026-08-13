@@ -55,11 +55,12 @@ jobs:
             echo "portfolio_changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Install LibreOffice
+      - name: Install LibreOffice and fonts
         if: steps.diff.outputs.cv_changed == 'true' || steps.diff.outputs.portfolio_changed == 'true'
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends libreoffice-writer
+          sudo apt-get install -y --no-install-recommends libreoffice-writer fonts-nanum
+          fc-cache -f
 
       - name: Convert CV docx to PDF
         if: steps.diff.outputs.cv_changed == 'true'
