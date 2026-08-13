@@ -1,0 +1,62 @@
+name: Generate CV DOCX
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - "_config.yml"
+      - "scripts/generate_cv_docx.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-cv-docx
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml python-docx
+
+      - name: Generate CV docx from _config.yml
+        run: python scripts/generate_cv_docx.py
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/ko/HyeonseungKang-CV.docx; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install LibreOffice
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libreoffice-writer
+
+      - name: Convert CV docx to PDF
+        if: steps.diff.outputs.changed == 'true'
+        run: soffice --headless --convert-to pdf --outdir data/ko data/ko/HyeonseungKang-CV.docx
+
+      - name: Commit updated CV docx and PDF
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ko/HyeonseungKang-CV.docx data/ko/HyeonseungKang-CV.pdf
+          git commit -m "chore: regenerate CV docx and pdf from _config.yml [skip ci]"
+          git push
