@@ -16,8 +16,7 @@ Single-page static résumé/portfolio site for 강현승 (Hyeonseung Kang), serv
   - Generate Portfolio DOCX: `python3 scripts/generate_portfolio_docx.py`
   - Required Python packages: `pyyaml`, `python-docx`
 - **Deployment & Automation:**
-  - Pushing to `master` triggers [.github/workflows/jekyll.yml](.github/workflows/jekyll.yml), which builds the Jekyll site (`actions/jekyll-build-pages@v1`) and deploys `_site` to GitHub Pages.
-  - [.github/workflows/generate-cv.yml](.github/workflows/generate-cv.yml) and [.github/workflows/generate-portfolio.yml](.github/workflows/generate-portfolio.yml) automatically regenerate `.docx` and `.pdf` documents when `_config.yml` or generator scripts change.
+  - Pushing to `master` triggers the single workflow [.github/workflows/deploy.yml](.github/workflows/deploy.yml), which regenerates the CV/Portfolio `.docx` + `.pdf` from `_config.yml` (committing them back if changed), then builds the Jekyll site (`actions/jekyll-build-pages@v1`) and deploys `_site` to GitHub Pages — all in one job, so there's never more than one workflow run pushing to `master` at a time.
 
 ## Architecture & Configuration
 
