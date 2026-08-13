@@ -28,8 +28,9 @@
                 </p>
                 <p id="contact-info" style="text-align:center">
                     {% if site.email %}<a href="mailto:{{ site.email }}">Email</a>{% endif %}
-                    {% if site.cv_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.cv_url }}">CV</a>{% endif %}
                     {% if site.github_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.github_url }}">Github</a>{% endif %}
+                    {% if site.cv_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.cv_url }}">CV</a>{% endif %}
+                    {% if site.portfolio_url %}&nbsp;&nbsp;/&nbsp;&nbsp;<a href="{{ site.portfolio_url }}">Portfolio</a>{% endif %}
                 </p>
             </div>
             {% if site.profile_photo %}

@@ -2,6 +2,7 @@ title: 강현승
 author: 강현승
 email: hyeonseungkang@outlook.com
 cv_url: data/ko/HyeonseungKang-CV.pdf
+portfolio_url: data/ko/HyeonseungKang-Portfolio.pdf
 github_url: https://github.com/hyeonseungkang
 profile_photo: images/profile.png
 naver_site_verification: 564c84673e03d8aeb716f06d6ee52eaf255a123d
@@ -155,7 +156,7 @@ sections:
         description: "1종 보통"
       - period: "2026년 3월 24일"
         title: "TOEIC(토익)"
-        description: "860점"
+        description: "870점"
       - period: "2026년 3월 3일"
         title: "컴퓨터활용능력"
         description: "2급"

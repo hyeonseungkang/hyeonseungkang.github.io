@@ -13,3 +13,7 @@ _site/
 .jekyll-metadata
 .bundle/
 vendor/
+venv/
+
+# Python
+__pycache__/
