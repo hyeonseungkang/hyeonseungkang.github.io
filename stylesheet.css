@@ -1,4 +1,5 @@
-/* latin-ext */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&display=swap');
+
 @font-face {
   font-family: 'Lato';
   font-style: italic;
@@ -112,7 +113,7 @@ h2 {
 .name {
   padding-top: 20px;
   margin: 0;
-  font-family: serif;
+  font-family: "Noto Serif KR", serif;
   font-size: 38px;
 }
 
@@ -239,6 +240,7 @@ ul {
 .toc-title {
   flex: none;
   min-width: 104px;
+  font-family: "Noto Serif KR", serif;
 }
 
 .toc-links {
@@ -249,6 +251,7 @@ ul {
 /* section heading */
 
 .section-heading {
+  font-family: "Noto Serif KR", serif;
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto;
