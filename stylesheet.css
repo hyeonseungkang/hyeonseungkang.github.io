@@ -330,6 +330,11 @@ ul {
     padding: 0 20px 20px 20px !important;
   }
 
+  .entry-list--자격사항 .entry-side,
+  .entry-list--자격사항 .entry-main {
+    white-space: nowrap;
+  }
+
   #floating-button {
     display: none !important;
   }
@@ -345,7 +350,7 @@ ul {
   }
 }
 
-/* 경력사항/활동: date column top-aligned */
+/* 경력사항/활동/자격사항: date column top-aligned */
 .entry-list--history .entry-side {
   align-self: flex-start;
   width: 30%;
@@ -355,6 +360,11 @@ ul {
 .entry-list--history .entry-main {
   width: 65%;
   padding: 0 0 0 20px;
+}
+
+.entry-list--자격사항 .entry-side,
+.entry-list--자격사항 .entry-main {
+  white-space: nowrap;
 }
 
 .footer-row {

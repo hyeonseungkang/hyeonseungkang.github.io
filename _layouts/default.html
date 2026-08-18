@@ -64,7 +64,7 @@
         <div class="section-parent">
             <h2 class="section-heading"><a class="hash-link" href="#{{ section.id }}">#</a> {{ section.title }}</h2>
             <hr>
-            <div class="entry-list entry-list--{{ section.type }}">
+            <div class="entry-list entry-list--{{ section.type }} entry-list--{{ section.id }}">
                 {% if section.type == "edu" %}
                     {% for item in section.items %}
                     {% assign period_parts = item.period | split: " - " %}
