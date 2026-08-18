@@ -179,6 +179,13 @@ sections:
         period: "2026년 8월"
         title: "실전제조AI"
         subtitle: "아주대학교 AI부트캠프사업단"
+      - image: "images/logo-kosha.jpg"
+        period: "2026년 8월"
+        title: "건설업 기초안전보건교육"
+        subtitle: "카이스건설기술교육"
+        links:
+          - text: "Certificate"
+            url: "images/건설업기초안전보건교육_이수증명서.jpg"
 
   - id: "수상"
     title: "수상"
