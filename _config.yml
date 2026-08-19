@@ -185,7 +185,7 @@ sections:
         subtitle: "카이스건설기술교육"
         links:
           - text: "Certificate"
-            url: "images/건설업기초안전보건교육_이수증명서.jpg"
+            url: "images/construction_health_cert.jpg"
 
   - id: "수상"
     title: "수상"
