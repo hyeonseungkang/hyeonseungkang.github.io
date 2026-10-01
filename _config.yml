@@ -48,7 +48,7 @@ sections:
 
       - image: "images/steel_processing.png"
         period: "2026년 8월 - 2026년 8월"
-        title: "철강 냉간 열연 작업 간 표면 결함 탐지 시스템 구축"
+        title: "철강 열연 작업 간 표면 결함 탐지 시스템 구축"
         links:
           - text: "Video"
             url: "https://youtu.be/pmlpsswTKRs"
@@ -95,7 +95,7 @@ sections:
           - "NASA ASTER GDEM 국지 고도 데이터 가공으로 좌표ㆍ고도 간 변환 구축"
           - "PostGIS 익스텐션을 결합한 PostgreSQL을 도입하여 공간 인덱싱 최적화 수행"
           - "Redis 인메모리 DB를 도입하여 640만 건 규모의 위치정보요약 DB 조회 성능 한계 극복"
-          - "LightGBM 및 XGBoost 기반의 트리 머신러닝 분류 모델 하이퍼파리미터 튜닝 및 적용"
+          - "LightGBM 및 XGBoost 기반의 트리 머신러닝 분류 모델 하이퍼파라미터 튜닝 및 적용"
 
       - image: "images/thumbnail_virtual_printer.png"
         period: "2022년 9월 – 2022년 11월"
@@ -108,7 +108,7 @@ sections:
         details:
           - "물리적인 프린터 하드웨어 없이도 인쇄 스트림 데이터를 Buffer 형태로 캡처하여 파일 저장 및 2차 데이터 처리 구현"
           - "RFC 8011 표준 사양 구현ㆍIPP/1.1 표준 프로토콜 기반의 프린터 속성 및 작업 상태 데이터 모델 설계 및 검증"
-          - "Bonjour 네트워크 자동 탐색으로 기능 별도 설정 없이 로컬 네트워크 내에서 가상 프린터가 자동으로 검색되도록 구현"
+          - "Bonjour 네트워크 자동 탐색으로 별도 설정 없이 로컬 네트워크 내에서 가상 프린터가 자동으로 검색되도록 구현"
 
       - image: "images/thumbnail_ajou_print_on_air.png"
         period: "2022년 8월 – 2022년 9월"
@@ -197,8 +197,8 @@ sections:
             url: "images/청년일경험_fnc_수료증.jpg"
       - image: "images/surface_fault.png"
         period: "2026년 8월"
-        title: "철강 냉간 열연 작업 간 표면 결함 탐지 시스템 구축 프로젝트"
-        subtitle: "한국생산성본주, 아주대학교 실전제조AI 부트캠프"
+        title: "철강 열연 작업 간 표면 결함 탐지 시스템 구축 프로젝트"
+        subtitle: "한국생산성본부, 아주대학교 실전제조AI 부트캠프"
         links:
           - text: "Video"
             url: "https://youtu.be/pmlpsswTKRs"
