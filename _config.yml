@@ -51,7 +51,7 @@ sections:
         title: "철강 열연 작업 간 표면 결함 탐지 시스템 구축"
         links:
           - text: "Video"
-            url: "https://youtu.be/pmlpsswTKRs"
+            url: "https://youtu.be/E7LgIgxHfd0"
         details:
           -  액션캠 및 Ffmpeg 스트림 캡처를 통한 실시간 연속 강판 이미지 입력 환경 구축
           -  ZXING-WASM 기반 200ms 주기 GS1 DataMatrix 바코드 실시간 디코딩 및 프레임 메타데이터 추출
@@ -201,7 +201,7 @@ sections:
         subtitle: "한국생산성본부, 아주대학교 실전제조AI 부트캠프"
         links:
           - text: "Video"
-            url: "https://youtu.be/pmlpsswTKRs"
+            url: "https://youtu.be/E7LgIgxHfd0"
       - image: "images/logo-kosha.jpg"
         period: "2026년 8월"
         title: "건설업 기초안전보건교육"
