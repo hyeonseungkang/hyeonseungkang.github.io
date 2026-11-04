@@ -32,6 +32,40 @@ sections:
     title: "프로젝트"
     type: "media"
     items:
+      - image: "images/b-cube-idp.png"
+        period: "2026년 10월 - 2026년 11월"
+        title: "B-Cube Idp 인증 플랫폼 구축"
+        links:
+          - text: "Website"
+            url: "https://id.b-cube.kr"
+          - text: "Repo"
+            url: "https://github.com/AU-Bcube/b-cube-idp"
+          - text: "기획문서"
+            url: "data/ko/기획문서-b-cube-idp.pdf"
+        details:
+          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)"의 통합 인증 플랫폼 구축'
+          - "MongoDB / Hono / SOCKS5 / Private repo dependency"
+          - "기존 아주대학교 구글 OAuth를 재사용, 구글 OAuth와 SP 사이에 scope 확장 레이어로 동작"
+          - "자체 OIDC IdP 구축으로 학사시스템에서 조회가능한 scope를 추가"
+          - "학사정보를 가져오는 민감한 코드베이스는 분리된 Private repo에 별도 npm 패키지로 배포"
+
+      - image: "images/b-cube-subdomain-lending.png"
+        period: "2026년 10월 - 2026년 11월"
+        title: "B-Cube 서브도메인 대여체계 구축"
+        links:
+          - text: "Website"
+            url: "https://domain.b-cube.kr"
+          - text: "Repo"
+            url: "https://github.com/AU-Bcube/b-cube-subdomain-lending"
+          - text: "기획문서"
+            url: "data/ko/기획문서-b-cube-subdomain-lending.pdf"
+        details:
+          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)"의 서브도메인 대여체계 구축'
+          - "MongoDB / React / Cloudflare / Carbon design system"
+          - "B-Cube Idp 인증 플랫폼 사용 SP로 개발하여 로그인 시 소학회원 인증"
+          - "Cloudflare API로 DNS 레코드 수정, 사용자는 콘솔로 서브도메인을 대여 반납"
+          - "소학회 유휴자산인 .b-cube.kr 도메인을 대여하여 유휴자산 가치 발굴"
+
       - image: "images/b-cube.png"
         period: "2026년 2월 - 현재"
         title: "b-cube.kr 유지보수"
