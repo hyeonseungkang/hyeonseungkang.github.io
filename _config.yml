@@ -184,7 +184,7 @@ sections:
     items:
       - period: "2026년 2월 - 현재"
         title: '아주대학교 소학회 "B-cube(비큐브)"'
-        description: "개발 팀장 / b-cube.kr 웹페이지 유지보수"
+        description: "개발 팀장 / 소학회 내부 어플리케이션 기획, 개발, 수정, 배포"
       - period: "2026년 2월 - 2026년 6월"
         title: "아주대학교 인공지능융합학과"
         description: "기계학습기초 교과목 TA"
