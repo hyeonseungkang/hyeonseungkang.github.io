@@ -41,7 +41,7 @@ sections:
             url: "https://nextlab.ai"
         details:
           - 'SK브로드밴드의 웹사이트 개편을 위한 HCI 평가 시스템 개발'
-          - "BFS 크롤러 및 browser-use 기반 사람 모방 브라우징 구현, 크롤링 결과 페이지 그래프 통합 구현"
+          - "BFS 크롤러 및 browser-use 기반 사람 모방 브라우징 구현, 경로 그래프 통합 구현"
           - "ISO/IEC 25010ㆍNielsenㆍWCAGㆍAalto AIM 기반 페르소나별 가중치 평가 지표 설계"
           - "LLM 페이지 요약, 임베딩ㆍBM25 RRF, LLM 판정을 결합한 과업별 최적 경로 선택 방식 비교 실험 및 채택"
           - "사이트맵 기반 크롤링 범위 자동 설정, 로그인 쿠키 생성, 크롤링 관리 대시보드 개발"
