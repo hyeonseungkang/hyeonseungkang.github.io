@@ -33,22 +33,18 @@ sections:
     title: "프로젝트"
     type: "media"
     items:
-      - image: "images/b-cube-idp.png"
-        period: "2026년 10월 - 2026년 11월"
-        title: "B-Cube Idp 인증 플랫폼 구축"
+      - image: "images/bworld_umsi.png"
+        period: "2026년 9월 - 2026년 12월"
+        title: "AI 기반 디지털 서비스 품질·고객경험(CX) 자동진단 시스템"
         links:
-          - text: "Website"
-            url: "https://id.b-cube.kr"
-          - text: "Repo"
-            url: "https://github.com/AU-Bcube/b-cube-idp"
-          - text: "기획문서"
-            url: "data/ko/기획문서-b-cube-idp.pdf"
+          - text: "(주)넥스트랩"
+            url: "https://nextlab.ai"
         details:
-          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)"의 통합 인증 플랫폼 구축'
-          - "MongoDB / Hono / SOCKS5 / Private repo dependency"
-          - "기존 아주대학교 구글 OAuth를 재사용, 구글 OAuth와 SP 사이에 scope 확장 레이어로 동작"
-          - "자체 OIDC IdP 구축으로 학사시스템에서 조회가능한 scope를 추가"
-          - "학사정보를 가져오는 민감한 코드베이스는 분리된 Private repo에 별도 npm 패키지로 배포"
+          - 'SK브로드밴드의 웹사이트 개편을 위한 HCI 평가 시스템 개발'
+          - "BFS 크롤러 및 browser-use 기반 사람 모방 브라우징 구현, 크롤링 결과 페이지 그래프 통합 구현"
+          - "ISO/IEC 25010ㆍNielsenㆍWCAGㆍAalto AIM 기반 페르소나별 가중치 평가 지표 설계"
+          - "LLM 페이지 요약, 임베딩ㆍBM25 RRF, LLM 판정을 결합한 과업별 최적 경로 선택 방식 비교 실험 및 채택"
+          - "사이트맵 기반 크롤링 범위 자동 설정, 로그인 쿠키 생성, 크롤링 관리 대시보드 개발"
 
       - image: "images/b-cube-subdomain-lending.png"
         period: "2026년 10월 - 2026년 11월"
@@ -67,19 +63,37 @@ sections:
           - "Cloudflare API로 DNS 레코드 수정, 사용자는 콘솔로 서브도메인을 대여 반납"
           - "소학회 유휴자산인 .b-cube.kr 도메인을 대여하여 유휴자산 가치 발굴"
 
+      - image: "images/b-cube-idp.png"
+        period: "2026년 10월 - 2026년 11월"
+        title: "B-Cube Idp 인증 플랫폼 구축"
+        links:
+          - text: "Website"
+            url: "https://id.b-cube.kr"
+          - text: "Repo"
+            url: "https://github.com/AU-Bcube/b-cube-idp"
+          - text: "기획문서"
+            url: "data/ko/기획문서-b-cube-idp.pdf"
+        details:
+          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)"의 통합 인증 플랫폼 구축'
+          - "MongoDB / Hono / SOCKS5 / Private repo dependency"
+          - "기존 아주대학교 구글 OAuth를 재사용, 구글 OAuth와 SP 사이에 scope 확장 레이어로 동작"
+          - "자체 OIDC IdP 구축으로 학사시스템에서 조회가능한 scope를 추가"
+          - "학사정보를 가져오는 민감한 코드베이스는 분리된 Private repo에 별도 npm 패키지로 배포"
+
       - image: "images/b-cube.png"
         period: "2026년 2월 - 현재"
-        title: "b-cube.kr 유지보수"
+        title: "b-cube.kr 개발"
         links:
           - text: "Website"
             url: "https://b-cube.kr"
           - text: "Repo"
             url: "https://github.com/AU-Bcube/b-cube-new"
         details:
-          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)" 홈페이지 유지보수'
+          - '아주대학교 경영인텔리전스학과 소학회 "B-cube(비큐브)" 홈페이지 개발'
           - "Next.js / MongoDB / Netlify / Cloudflare"
           - "Netlify Opensource Plan 프로젝트 선정으로 호스팅 비용 무료화"
           - "Github Project 이슈 트래커 구축 / PR 및 이슈 컨벤션 정의"
+          - "Discord / Notion 사용한 문서 및 개발팀 커뮤니케이션 고도화"
 
       - image: "images/steel_processing.png"
         period: "2026년 8월 - 2026년 8월"
@@ -161,7 +175,7 @@ sections:
     title: "경력사항"
     type: "history"
     items:
-      - period: "2026년 9월 - 현재"
+      - period: "2026년 9월 - 2026년 12월"
         title: "(주)넥스트랩"
         address: "서울 강남구 선릉로90길 40 예감빌딩 4층"
         description: "FKII ICT인턴십 / 브랜드경험팀"
